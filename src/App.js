@@ -1,23 +1,30 @@
-import { func } from "prop-types";
-import { useState, useEffect } from "react";
-
-function Hello() {
-  useEffect(function() {
-    console.log("hi :)");
-    return function() {
-      console.log("bye :(");
-    }
-  }, []);
-  return <h1>Hello</h1>;
-}
+import { useState } from "react";
 
 function App() {
-  const [showing, setShowing] = useState(false);
-  const onClick = () => setShowing((prev) => !prev);
+  const [toDo, setToDo] = useState("");
+  const [toDos, setToDos] = useState([]);
+  const onChange = (e) => setToDo(e.target.value);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if(toDo === "") {
+      return;
+    }
+    setToDos(currentArray => [toDo, ...currentArray]);
+    setToDo("");
+  }
+  console.log(toDos);
   return (
     <div>
-      {showing ? <Hello /> : null}
-      <button onClick={onClick}>{showing ? "Hide" : "Show"}</button>
+      <h1>My ToDos ({toDos.length})</h1>
+      <form onSubmit={onSubmit}>
+        <input
+          value={toDo}
+          onChange={onChange} 
+          text="text" 
+          placeholder="Write your to do..." 
+        />
+        <button>Add To do</button>
+      </form>
     </div>
   );
 }
