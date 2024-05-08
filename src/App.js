@@ -5,7 +5,7 @@ function App() {
   const [keyword, setKeyword] = useState("");
   const onClick = () => setValue((prev) => prev + 1);
   const onChange = (e) => {
-          setKeyword(e.target.value)
+          setKeyword(e.target.value);
         };
   useEffect(() => {
     console.log("I run only once");
